@@ -1,0 +1,9 @@
+WholeBodyWAM project page.
+
+Quick public preview options:
+1) Cloudflare Tunnel (temporary public URL)
+2) GitHub Pages
+3) Netlify / static hosting
+
+Local preview:
+  python3 -m http.server 8000 --bind 127.0.0.1

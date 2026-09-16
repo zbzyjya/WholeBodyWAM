@@ -1,0 +1,9 @@
+*.part
+.DS_Store
+*.bak
+*.bak.mp4
+WholebodyWAM*.pdf
+videos/480p*.mp4
+videos/bg_video/kneel_4k.mp4
+videos/bg_video/20260911-*.mp4
+videos/bg_video/kneel_web.mp4

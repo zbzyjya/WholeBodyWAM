@@ -1,0 +1,1168 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>WholeBodyWAM</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+		<link rel="icon" href="images/logo.ico?v=0916b" type="image/x-icon">
+		<link rel="icon" href="images/favicon.png?v=0916b" type="image/png" sizes="256x256">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			html, body {
+				background: #eef5ff !important;
+			}
+
+			#wrapper {
+				background: #eef5ff !important;
+			}
+
+			#nav {
+				background: #5f6b7a !important;
+			}
+
+			#nav .links li a,
+			#nav .icons a {
+				color: #ffffff !important;
+			}
+
+			#nav .links li.active {
+				background: #ffffff !important;
+			}
+
+			#nav .links li.active a {
+				color: #243447 !important;
+			}
+
+			#main {
+				background: #f8fbff !important;
+				padding: 4rem 0 !important;
+				width: 100% !important;
+				max-width: none !important;
+				margin: 0 !important;
+			}
+
+			.post,
+			.post.featured {
+				background: #ffffff !important;
+				width: calc(100% - 6rem) !important;
+				margin: 0 auto 2rem auto !important;
+				border-radius: 16px;
+				box-shadow: 0 8px 24px rgba(47, 84, 120, 0.08);
+			}
+
+			h1, h2, h3, h4, h5, h6,
+			p {
+				color: #243447 !important;
+			}
+			
+			/* 1. 强制让 intro 容器变成相对定位，并确保它是透明的 */
+			#intro {
+				position: relative !important;
+				background: transparent !important; /* 必须透明，否则会被原有的背景色遮挡 */
+				overflow: hidden;
+				height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				z-index: 1;
+			}
+
+			/* 2. 强制视频填满整个背景 */
+			#bg-video {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover; /* 关键：确保视频铺满不留黑边 */
+				z-index: -1;      /* 关键：把视频推到最底层 */
+			}
+
+			/* 3. 确保文字是白色且在最上层 */
+			#intro h1, #intro p, #intro .actions {
+				position: relative;
+				z-index: 2;
+				color: #ffffff !important;
+			}
+
+			#intro h1 {
+				text-transform: none !important;
+			}
+
+			#intro .authors,
+			#intro .affiliations,
+			#intro .author-note {
+				max-width: 96%;
+				margin-left: auto;
+				margin-right: auto;
+				font-style: normal;
+				letter-spacing: 0;
+				text-transform: none;
+			}
+
+			#intro .authors {
+				margin-top: 0.7rem;
+				margin-bottom: 0.35rem;
+				font-size: clamp(0.72rem, 1.05vw, 1rem);
+				line-height: 1.7;
+			}
+
+			#intro .affiliations {
+				margin-top: 0;
+				margin-bottom: 0.25rem;
+				font-size: clamp(0.62rem, 0.82vw, 0.82rem);
+				line-height: 1.6;
+			}
+
+			#intro .author-note {
+				margin-top: 0;
+				margin-bottom: 0.7rem;
+				font-size: clamp(0.6rem, 0.76vw, 0.76rem);
+				line-height: 1.4;
+			}
+
+			#intro sup {
+				font-size: 0.7em;
+				vertical-align: super;
+			}
+
+			#header .logo {
+				text-transform: none !important;
+			}
+
+			#intro::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: radial-gradient(circle, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%); 		
+				z-index: 1;
+			}
+			
+			.video-grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);  /* 三列 */
+				gap: 20px;  /* 视频间距 */
+				width: 100%;
+			}
+			.video-item {
+				text-align: center;
+			}
+			.video-container video {
+				width: 100%;
+				border-radius: 8px;
+			}
+			.video-caption {
+				margin-top: 8px;
+				font-size: 14px;
+			}
+			.video-container video {
+				width: 100%;
+				height: auto;
+				display: block; /* 去除默认 inline-block 的空隙 */
+			}
+			.video-wrapper {
+				width: 100%;
+				background: #dfeaf7;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.carousel-section {
+				position: relative;
+				width: 100%;
+				max-width: 1400px;
+				margin: 40px auto;
+				overflow: hidden;
+				padding: 20px 0;
+			}
+
+			.carousel {
+				position: relative;
+				height: 640px;
+			}
+
+			.carousel .card {
+				position: absolute;
+				top: 0;
+				left: 50%;
+				width: 760px;
+				max-width: 78vw;
+				background: #f8fbff;
+				border-radius: 28px;
+				box-shadow: 0 20px 50px rgba(47, 84, 120, 0.10);
+				overflow: hidden;
+				transform: translateX(-50%) scale(0.82);
+				opacity: 0.35;
+				transition: all 0.45s ease;
+				pointer-events: none;
+			}
+
+			.carousel .card video {
+				width: 100%;
+				max-height: 430px;
+				height: auto;
+				display: block;
+				object-fit: contain;
+				background: #dfeaf7;
+			}
+
+			.carousel .card-content {
+				padding: 22px 28px 30px;
+			}
+
+			.carousel .card-content h3 {
+				margin: 12px 0 8px;
+				font-size: 22px;
+				color: #243447;
+			}
+
+			.carousel .card-content p {
+				margin: 0;
+				font-size: 16px;
+				color: #5f6b7a;
+				text-transform: none !important;
+			}
+
+			.carousel .tag {
+				display: inline-block;
+				padding: 6px 14px;
+				border: 1px solid #d6e2f0;
+				border-radius: 999px;
+				font-size: 12px;
+				letter-spacing: 0.08em;
+				color: #7a8da6;
+				background: #f7fbff;
+			}
+
+			.carousel .card.active {
+				transform: translateX(-50%) scale(1);
+				opacity: 1;
+				z-index: 3;
+				pointer-events: auto;
+			}
+
+			.carousel .card.left {
+				transform: translateX(-125%) scale(0.82);
+				opacity: 0.45;
+				z-index: 2;
+			}
+
+			.carousel .card.right {
+				transform: translateX(25%) scale(0.82);
+				opacity: 0.45;
+				z-index: 2;
+			}
+
+			.carousel .card.hidden-left {
+				transform: translateX(-190%) scale(0.72);
+				opacity: 0;
+				z-index: 1;
+			}
+
+			.carousel .card.hidden-right {
+				transform: translateX(90%) scale(0.72);
+				opacity: 0;
+				z-index: 1;
+			}
+
+			.nav-btn {
+				position: absolute;
+				top: 220px;
+				width: 64px;
+				height: 64px;
+				padding: 0;
+				border: none;
+				border-radius: 50%;
+				background: rgba(255, 255, 255, 0.92);
+				box-shadow: 0 8px 24px rgba(47, 84, 120, 0.12);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 38px;
+				line-height: 1;
+				text-align: center;
+				cursor: pointer;
+				z-index: 10;
+				transform: translateY(-50%);
+				color: #243447;
+				appearance: none;
+				-webkit-appearance: none;
+			}
+
+			.nav-btn.left {
+				left: 20px;
+			}
+
+			.nav-btn.right {
+				right: 20px;
+			}
+
+			.nav-btn:hover {
+				background: #ffffff;
+			}
+
+			.teaser-block {
+		padding-top: 1.2rem !important;
+		padding-bottom: 1.2rem !important;
+		}
+
+		.teaser-image {
+		margin: 0 0 0.45rem 0 !important;
+		}
+
+		.teaser-image img {
+		width: 30%;
+		margin: 0 auto;
+		display: block;
+		}
+
+		.teaser-caption {
+		margin: 0 0 0.55rem 0 !important;
+		text-align: center;
+		font-size: 1.1rem !important;
+		line-height: 1.2;
+		color: #243447 !important;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+		font-weight: 700;
+		}
+
+		.teaser-text {
+		width: 80%;
+		margin: 0 auto;
+		}
+
+		.teaser-overview {
+		width: 84%;
+		margin: 0 auto 1.2rem auto;
+		}
+
+		.teaser-overview p {
+		margin: 0 !important;
+		font-size: 0.95rem !important;
+		line-height: 1.75 !important;
+		text-align: left;
+		color: #3f4d5f !important;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+		font-style: normal !important;
+		font-weight: 400 !important;
+		letter-spacing: 0 !important;
+		text-transform: none !important;
+		}
+
+		.teaser-text p {
+		margin: 0 0 0.85rem 0 !important;
+		font-size: 0.9rem !important;
+		line-height: 1.75 !important;
+		text-align: left;
+		color: #3f4d5f !important;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+		font-style: normal !important;
+		font-weight: 400 !important;
+		letter-spacing: 0 !important;
+		text-transform: none !important;
+		}
+
+		.teaser-text p:last-child {
+		margin-bottom: 0 !important;
+		}
+
+		.model-text {
+		width: 84%;
+		margin: 0.6rem auto 0 auto;
+		}
+
+		.model-intro,
+		.model-outro {
+		width: 100%;
+		margin: 0 0 1rem 0 !important;
+		font-size: 0.95rem !important;
+		line-height: 1.72 !important;
+		text-align: left;
+		color: #4a5668 !important;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+		font-style: normal !important;
+		font-weight: 400 !important;
+		letter-spacing: 0 !important;
+		text-transform: none !important;
+		}
+
+		.model-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		margin: 0.9rem 0 0.9rem 0;
+		align-items: stretch;
+		}
+
+		.model-card {
+		background: #fcfdff;
+		border: 1px solid #dfe7f2;
+		border-radius: 18px;
+		padding: 20px 22px 18px;
+		box-shadow: 0 6px 16px rgba(47, 84, 120, 0.05);
+		text-align: left;
+		}
+
+		.model-card h4 {
+		margin: 0 0 0.7rem 0;
+		font-size: 1.1rem;
+		line-height: 1.35;
+		color: #243447 !important;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+		font-weight: 700 !important;
+		letter-spacing: 0.01em;
+		text-transform: none !important;
+		}
+
+		.model-card p {
+			margin: 0 0 0.75rem 0 !important;
+			font-size: 0.95rem !important;
+			line-height: 1.72 !important;
+			color: #566579 !important;
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+			font-style: normal !important;
+			font-weight: 400 !important;
+			letter-spacing: 0 !important;
+			text-transform: none !important;
+
+			text-align: left !important;
+			text-justify: auto !important;
+			word-spacing: normal !important;
+			hyphens: none !important;
+		}
+
+		.model-card p:last-child {
+			margin-bottom: 0 !important;
+		}
+
+		@media screen and (max-width: 980px) {
+		.model-text {
+			width: 92%;
+			margin-top: 0.4rem;
+		}
+
+		.model-intro,
+		.model-outro {
+			width: 100%;
+		}
+
+		.model-grid {
+			gap: 14px;
+		}
+		}
+
+		.analysis-grid {
+		width: 88%;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 28px;
+		}
+
+		.analysis-card {
+		background: #fcfdff;
+		border: 1px solid #dfe7f2;
+		border-radius: 20px;
+		padding: 22px 24px;
+		box-shadow: 0 8px 20px rgba(47, 84, 120, 0.06);
+		}
+
+		.analysis-card h4 {
+		margin: 0 0 1rem 0;
+		font-size: 1.15rem;
+		line-height: 1.3;
+		color: #243447 !important;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+		font-weight: 700 !important;
+		text-transform: none !important;
+		text-align: left;
+		}
+
+		.analysis-image {
+		margin: 0 0 0.8rem 0 !important;
+		text-align: center;
+		}
+
+		.analysis-image img {
+		width: 82%;
+		margin: 0 auto;
+		display: block;
+		}
+
+		.analysis-image-small img {
+		width: 52%;
+		}
+
+		.analysis-text {
+		width: 88%;
+		margin: 0 auto;
+		}
+
+		.analysis-text p {
+		margin: 0 0 0.8rem 0 !important;
+		font-size: 0.95rem !important;
+		line-height: 1.72 !important;
+		color: #566579 !important;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+		font-style: normal !important;
+		font-weight: 400 !important;
+		text-transform: none !important;
+		text-align: left !important;
+		word-spacing: normal !important;
+		letter-spacing: 0 !important;
+		}
+
+		.analysis-text p:last-child {
+		margin-bottom: 0 !important;
+		}
+
+		@media screen and (max-width: 980px) {
+		.analysis-grid {
+			width: 94%;
+			gap: 20px;
+		}
+
+		.analysis-card {
+			padding: 18px 16px;
+		}
+
+		.analysis-image img {
+			width: 100%;
+		}
+
+		.analysis-image-small img {
+			width: 65%;
+		}
+
+		.analysis-text {
+			width: 100%;
+		}
+		}
+
+		.result-grid {
+		width: 88%;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 28px;
+		}
+
+		.result-card {
+		background: #fcfdff;
+		border: 1px solid #dfe7f2;
+		border-radius: 20px;
+		padding: 22px 24px;
+		box-shadow: 0 8px 20px rgba(47, 84, 120, 0.06);
+		}
+
+		.result-card h4 {
+		margin: 0 0 1rem 0;
+		font-size: 1.15rem;
+		line-height: 1.3;
+		color: #243447 !important;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+		font-weight: 700 !important;
+		text-transform: none !important;
+		text-align: left;
+		}
+
+		.result-image {
+		margin: 0 0 0.9rem 0 !important;
+		text-align: center;
+		}
+
+		.result-img-wide {
+		width: 82%;
+		margin: 0 auto;
+		display: block;
+		}
+
+		.result-img-small {
+		width: 42%;
+		margin: 0.8rem auto 0 auto;
+		display: block;
+		}
+
+		.result-img-medium {
+		width: 55%;
+		margin: 0 auto;
+		display: block;
+		}
+
+		.result-text {
+		width: 88%;
+		margin: 0 auto;
+		}
+
+		.result-text p {
+		margin: 0 0 0.8rem 0 !important;
+		font-size: 0.95rem !important;
+		line-height: 1.72 !important;
+		color: #566579 !important;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+		font-style: normal !important;
+		font-weight: 400 !important;
+		text-transform: none !important;
+		text-align: left !important;
+		word-spacing: normal !important;
+		letter-spacing: 0 !important;
+		}
+
+		.result-text p:last-child {
+		margin-bottom: 0 !important;
+		}
+
+		.teaser-overview p,
+		.teaser-text p,
+		.model-intro,
+		.model-outro,
+		.model-card p,
+		.analysis-text p,
+		.result-text p {
+			text-align: justify !important;
+			text-justify: inter-word !important;
+		}
+
+		@media screen and (max-width: 980px) {
+			.result-grid {
+				width: 94%;
+				gap: 20px;
+			}
+
+			.result-card {
+				padding: 18px 16px;
+			}
+
+			.result-img-wide {
+				width: 100%;
+			}
+
+			.result-img-small {
+				width: 65%;
+			}
+
+			.result-img-medium {
+				width: 70%;
+			}
+		}
+
+		</style>
+
+		
+
+	</head>
+
+
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+					<div id="intro">
+						<!-- <img src="images/logo.png" alt="WholeBodyWAM logo" width="480"> -->
+						<video autoplay muted loop playsinline id="bg-video">
+							<source src="videos/bg_video/kneel_1080.mp4?v=0915-720" type="video/mp4">
+							您的浏览器不支持 HTML5 视频。
+    					</video>
+						<h1>WholeBodyWAM</h1>
+						<p style="font-size: clamp(0.8rem, 1.55vw, 1.25rem); line-height: 1.45; max-width: 90%; margin-left: auto; margin-right: auto;">Learning Whole-Body World Action Models with<br>Scalable Motion Priors</p>
+						<p class="authors">
+							Bowei Zhang<sup>1,2</sup> &nbsp; Qiyao Zhang<sup>2,3</sup> &nbsp; Shuanghao Bai<sup>2</sup> &nbsp; Xinhua Wang<sup>2</sup> &nbsp; Meng Li<sup>2,†</sup><br>
+							Yilei Wang<sup>4</sup> &nbsp; Leiwang Zhang<sup>4</sup> &nbsp; Jian Tang<sup>2</sup> &nbsp; Lu Zhou<sup>1,‡</sup> &nbsp; Lei Sun<sup>1,‡</sup> &nbsp; Zhengping Che<sup>2,‡</sup>
+						</p>
+						<p class="affiliations">
+							<sup>1</sup>Nankai University &nbsp;&nbsp; <sup>2</sup>Beijing Innovation Center of Humanoid Robotics<br>
+							<sup>3</sup>Beijing Institute of Technology &nbsp;&nbsp; <sup>4</sup>Tsinghua University
+						</p>
+						<p class="author-note"><sup>†</sup>Project Lead &nbsp;&nbsp; <sup>‡</sup>Corresponding Authors</p>
+						<ul class="actions">
+							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						</ul>
+					</div>
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">WholeBodyWAM</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li class="active"><a href="index.html">Home</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="#" class="icon brands" title="arXiv (coming soon)"><i class="ai ai-arxiv"><span> &nbsp;arXiv</span></i></a></li>
+							<li><a href="#" class="icon brands" title="Code (coming soon)"><i class="fab fa-github"><span> &nbsp;Code (coming soon)</span></i></a></li>
+						</ul>
+					</nav>
+
+					<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post featured teaser-block">
+								<header class="major">
+									<h3>Overview</h3>
+								</header>
+								<div class="teaser-overview">
+									<p>
+									WholeBodyWAM is a humanoid world-action model that learns a scalable predictive whole-body motion prior from heterogeneous human and humanoid motion and transfers it to real-world humanoid control. By treating the articulated body as an explicit predictive modality alongside scene dynamics, the model uses future whole-body evolution to inform embodiment-specific action generation.
+									</p>
+								</div>
+								<div class="image main teaser-image">
+									<img src="images/teaser.png?v=0911" alt="WholeBodyWAM overview" style="width: 80%; margin: 1.2rem auto 0 auto; display: block;"/>
+								</div>
+								<div class="teaser-text" style="margin-top: 15pt; margin-bottom: 10pt">
+									<p>
+									<strong>(a) UniMotion-4K Dataset.</strong><br>
+									We construct UniMotion-4K from 11 heterogeneous sources, including Internet and egocentric human videos, native 3D human-motion datasets, and motion collected on different humanoid platforms. After motion recovery, filtering, canonicalization, and motion-centric language annotation, the corpus contains approximately 1.19M variable-length sequences, 444.4M motion frames, and more than 4.1K hours of whole-body motion.
+									</p>
+									<p>
+									<strong>(b) Model Architecture and Training Overview.</strong><br>
+									WholeBodyWAM follows a two-stage training framework. Stage I pretrains a language-conditioned Motion Expert on UniMotion-4K to predict future whole-body motion without target-robot action supervision. Stage II integrates the pretrained Motion Expert with Video and Action Experts, allowing predictive scene dynamics and whole-body motion to jointly inform executable robot actions.
+									</p>
+									<p>
+									<strong>(c) Scalable Motion Transfer to Real-World Humanoid Control.</strong><br>
+									Heterogeneous motion is canonicalized into a shared root-free 63D representation containing the local axis-angle rotations of 21 joints, while global root translation, root orientation, and body shape are excluded. This unified space enables motion priors learned across embodiments to transfer to TianGong 3.0 whole-body manipulation and loco-manipulation tasks.
+									</p>
+								</div>
+							</article>
+
+
+							<article class="post featured">
+							<header class="major">
+								<h3>Model Architecture</h3>
+							</header>
+
+							<div class="image main">
+								<img src="images/model.png?v=0911" style="width: 90%; margin: 1rem auto 0 auto; display: block;" alt="WholeBodyWAM model architecture" />
+							</div>
+
+								<div class="model-text">
+								<p class="model-intro">
+									WholeBodyWAM combines scalable motion pretraining with a unified Video–Motion–Action world-action architecture. Stage I learns task-conditioned future body dynamics from language–motion pairs, and Stage II grounds this pretrained motion prior into target-robot control through layer-wise Mixture-of-Transformers attention.
+								</p>
+
+								<div class="model-grid">
+									<div class="model-card">
+									<h4>(a) Attention Mask</h4>
+									<p>
+										<strong>Asymmetric Video–Motion–Action Attention.</strong> During Stage II training, Motion and Action streams can attend to the current visual tokens and to each other, but cannot access future visual tokens. Future visual latents therefore provide predictive supervision without leaking privileged information. At inference, future visual tokens are omitted entirely while current visual observations continue to condition motion and action generation.
+									</p>
+									</div>
+
+									<div class="model-card">
+									<h4>(b) Stage I: Motion Pre-training</h4>
+									<p>
+										<strong>Learning Task-Conditioned Future Body Dynamics.</strong> A 30-block Motion Expert is pretrained on UniMotion-4K using continuous flow matching. Given 16 frames of motion history and a language instruction, it predicts the next 32 frames in the unified 63D motion space. This stage uses only language–motion pairs and requires neither target-robot actions nor target-robot demonstrations.
+									</p>
+									</div>
+
+									<div class="model-card">
+									<h4>(c) Stage II: Robot Post-training</h4>
+									<p>
+										<strong>Grounding Motion Priors into Robot Control.</strong> The Video, Motion, and Action Experts are jointly post-trained on target-robot demonstrations to predict future visual latents, future whole-body motion, and robot action chunks. Their modality-specific streams exchange information through layer-wise joint attention while retaining separate expert parameters. The predicted actions directly control the arms, hands, head, and waist, while high-level leg commands are executed by an RL-based whole-body controller for locomotion and balance.
+									</p>
+									</div>
+								</div>
+
+								<p class="model-outro">
+									At deployment, WholeBodyWAM uses the current onboard image, the latest 16 motion states, and a language instruction to jointly predict future whole-body motion and an executable action chunk. It replans in closed loop without generating or decoding future video, preserving predictive foresight while keeping inference efficient.
+								</p>
+								</div>
+							</article>
+
+							<article class="post featured">
+								<header class="major">
+									<h3>Motion Prediction</h3>
+								</header>
+
+								<div class="result-text" style="width: 84%; margin: 0 auto 1rem auto;">
+									<p>
+									WholeBodyWAM conditions on language and motion history to predict future whole-body motion, learning scalable body-dynamics priors before robot-specific training.
+									</p>
+								</div>
+
+								<div class="carousel-section">
+									<button class="nav-btn left">&#10094;</button>
+
+									<div class="carousel">
+										<div class="card active">
+											<div class="video-wrapper">
+												<video controls muted preload="none" playsinline>
+													<source data-src="videos/motion_pred/kneel.mp4?v=0911-1028" type="video/mp4">
+												</video>
+											</div>
+											<div class="card-content">
+												<span class="tag">Prompt</span>
+												<h3>Kneel</h3>
+												<p>A person kneels facing forward.</p>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="video-wrapper">
+												<video controls muted preload="none" playsinline>
+													<source data-src="videos/motion_pred/pick.mp4" type="video/mp4">
+												</video>
+											</div>
+											<div class="card-content">
+												<span class="tag">Prompt</span>
+												<h3>Pick</h3>
+												<p>A person bends down to pick up an object with their right hand and then rises back up.</p>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="video-wrapper">
+												<video controls muted preload="none" playsinline>
+													<source data-src="videos/motion_pred/run.mp4" type="video/mp4">
+												</video>
+											</div>
+											<div class="card-content">
+												<span class="tag">Prompt</span>
+												<h3>Run</h3>
+												<p>A person jogs forward at a steady pace.</p>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="video-wrapper">
+												<video controls muted preload="none" playsinline>
+													<source data-src="videos/motion_pred/walk.mp4" type="video/mp4">
+												</video>
+											</div>
+											<div class="card-content">
+												<span class="tag">Prompt</span>
+												<h3>Walk</h3>
+												<p>A person is walking forward at a normal pace.</p>
+											</div>
+										</div>
+									</div>
+
+									<button class="nav-btn right">&#10095;</button>
+								</div>
+							</article>
+
+							<article class="post featured">
+								<header class="major">
+									<h3>Real-world Demos</h3>
+								</header>
+
+								<div class="carousel-section">
+									<button class="nav-btn left">&#10094;</button>
+
+									<div class="carousel">
+										<div class="card active">
+											<div class="video-wrapper">
+												<video controls muted preload="none" playsinline>
+													<source data-src="videos/demo/Toy_pickup.mp4" type="video/mp4">
+												</video>
+											</div>
+											<div class="card-content">
+												<span class="tag">TianGong 3.0</span>
+												<h3>Toy Pickup</h3>
+												<p>Bend down, pick up the toys, and place them in the basket.</p>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="video-wrapper">
+												<video controls muted preload="none" playsinline>
+													<source data-src="videos/demo/Laundry%20Loading.mp4" type="video/mp4">
+												</video>
+											</div>
+											<div class="card-content">
+												<span class="tag">TianGong 3.0</span>
+												<h3>Laundry Loading</h3>
+												<p>Pick up the clothes and put them in the washing machine.</p>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="video-wrapper">
+												<video controls muted preload="none" playsinline>
+													<source data-src="videos/demo/pillow_transfer.mp4" type="video/mp4">
+												</video>
+											</div>
+											<div class="card-content">
+												<span class="tag">TianGong 3.0</span>
+												<h3>Pillow Transfer</h3>
+												<p>Pick up the cushion, walk to the sofa, and place it on the seat.</p>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="video-wrapper">
+												<video controls muted preload="none" playsinline>
+													<source data-src="videos/demo/kneel.mp4" type="video/mp4">
+												</video>
+											</div>
+											<div class="card-content">
+												<span class="tag">TianGong 3.0</span>
+												<h3>Kneeling Toy Storage</h3>
+												<p>Kneel down, pick up the toy, and place it in the box.</p>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="video-wrapper">
+												<video controls muted preload="none" playsinline>
+													<source data-src="videos/demo/toy_transfer.mp4" type="video/mp4">
+												</video>
+											</div>
+											<div class="card-content">
+												<span class="tag">TianGong 3.0</span>
+												<h3>Toy Transfer</h3>
+												<p>Pick up the toy, walk to the box, and place it inside.</p>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="video-wrapper">
+												<video controls muted preload="none" playsinline>
+													<source data-src="videos/demo/box_transfer.mp4" type="video/mp4">
+												</video>
+											</div>
+											<div class="card-content">
+												<span class="tag">TianGong 3.0</span>
+												<h3>Box Transfer</h3>
+												<p>Lift the box, carry it to the side table, and place it on the table.</p>
+											</div>
+										</div>
+									</div>
+
+									<button class="nav-btn right">&#10095;</button>
+								</div>
+							</article>
+
+							<article class="post featured teaser-block">
+								<header class="major">
+									<h3>Experiment Results</h3>
+								</header>
+
+								<div class="result-grid">
+									<div class="result-card">
+										<h4>Real-World Tiangong Task Performance</h4>
+
+										<div class="image main result-image">
+											<img src="images/table1.png?v=0911" alt="Real-world performance on humanoid whole-body tasks" class="result-img-wide" style="width: 95%; margin: 0 auto; display: block;" />
+										</div>
+
+										<div class="result-text">
+											<p>
+											<strong>Table I. Real-World Humanoid Whole-Body Control.</strong> WholeBodyWAM achieves the highest average normalized task score of <strong>72.2%</strong> across six real-world TianGong 3.0 tasks, outperforming the strongest baseline, GR00T N1.7, by <strong>11.4 percentage points</strong>. Removing Stage-I motion pretraining reduces the average score to <strong>59.1%</strong>, while blocking Motion-to-Action attention further lowers it to <strong>46.3%</strong>. Integrating the pretrained Motion Expert into τ<sub>0</sub>-WM improves its score from <strong>39.4%</strong> to <strong>62.7%</strong>, demonstrating that the learned motion prior transfers beyond the native WholeBodyWAM architecture.
+											</p>
+										</div>
+									</div>
+
+									<div class="result-card">
+										<h4>Scaling Motion Pretraining</h4>
+
+										<div class="image main result-image">
+											<img src="images/motion_scaling_exp_web.png?v=0911" alt="Motion pretraining scaling analysis" class="result-img-wide" style="width: 95%; margin: 0 auto; display: block;" />
+										</div>
+
+										<div class="result-text">
+											<p>
+											<strong>(a) Motion Prediction Scaling.</strong> Increasing Stage-I motion pretraining from 0 to 4K+ hours consistently improves future whole-body prediction across Toy Pickup, Laundry Loading, and Pillow Transfer. Mean MPJRE decreases from <strong>1.127° to 0.817°</strong>, a <strong>27.5% reduction</strong>.
+											</p>
+											<p>
+											<strong>(b) Downstream Control Scaling.</strong> Larger motion-pretraining datasets yield corresponding gains in real-world control. With the same target-robot demonstrations and post-training setup, the average task score rises from <strong>57.1% to 67.6%</strong> as pretraining scales from 0 to 4K+ hours.
+											</p>
+											<p>
+											<strong>(c) Target-Robot Data Efficiency.</strong> Motion pretraining improves average task scores by <strong>4.2, 11.2, and 10.5 percentage points</strong> when using 20%, 50%, and 100% of the target-robot demonstrations. With only 50% of the demonstrations, the 4K+ hour model reaches <strong>46.9%</strong>, surpassing FastWAM trained with the full dataset (<strong>42.9%</strong>).
+											</p>
+										</div>
+									</div>
+
+									<div class="result-card">
+										<h4>Analysis Experiments</h4>
+
+										<h5 style="margin: 0 0 0.8rem 0; text-align: left; text-transform: none;">Generalization to Unseen Task Variations</h5>
+										<div class="video-wrapper" style="width: 42%; max-width: 420px; margin: 0 auto 1rem auto; border-radius: 12px; overflow: hidden; border: 1px solid #dfe7f2; box-shadow: 0 6px 16px rgba(47, 84, 120, 0.06);">
+											<video controls muted playsinline preload="metadata" style="width: 100%; height: auto; display: block; background: #dfeaf7;">
+												<source src="videos/unseen/generalization.mp4?v=0915" type="video/mp4">
+											</video>
+										</div>
+										<div class="image main result-image">
+											<img src="images/unseentask.png?v=0911" alt="Generalization under unseen spatial and object variations" class="result-img-medium" style="width: 70%; margin: 0 auto; display: block;" />
+										</div>
+										<div class="result-text">
+											<p>
+											<strong>Robustness to Distribution Shifts.</strong> WholeBodyWAM generalizes better than GR00T N1.7 to both spatial and object-level variations. It achieves <strong>55.0%</strong> versus <strong>46.3%</strong> when the Toy Pickup basket is shifted by 15 cm, and <strong>75.0%</strong> versus <strong>63.3%</strong> on unseen toy colors and shapes in Kneeling Toy Storage.
+											</p>
+										</div>
+
+										<h5 style="margin: 1.4rem 0 0.8rem 0; text-align: left; text-transform: none;">Inference Efficiency</h5>
+										<div class="image main result-image">
+											<img src="images/inference_latency.png?v=0916" alt="End-to-end policy inference latency" class="result-img-wide" style="width: 82%; margin: 0 auto; display: block;" />
+										</div>
+										<div class="result-text">
+											<p>
+											<strong>Efficient Predictive Modeling.</strong> On a single NVIDIA A100 GPU, WholeBodyWAM runs at <strong>363 ms</strong> end-to-end latency—19.5× faster than DreamZero, 14.5× faster than LingBot-VA, and 1.45× faster than FastWAM—while remaining close to τ<sub>0</sub>-WM at 313 ms.
+											</p>
+										</div>
+									</div>
+								</div>
+							</article>
+
+
+					</div>
+
+				<!-- Footer -->
+					<!-- <footer id="footer">
+						<section>
+							<h4>BibTex</h4>
+							<pre style="white-space: pre-wrap; word-wrap: break-word; overflow-x: auto;"><code>
+								@article{,
+									author       = { and  and  and  and  and  and  and },
+									title        = {},
+									volume       = {abs/},
+									year         = {2025},
+								}
+							</code></pre>
+						</section>
+					</footer> -->
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<span id="busuanzi_container_site_pv">Total visit:<span id="busuanzi_value_site_pv"></span></span>
+					</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+			<script>
+				document.addEventListener('DOMContentLoaded', function () {
+					const sections = document.querySelectorAll('.carousel-section');
+
+					sections.forEach((section) => {
+						const cards = section.querySelectorAll('.carousel .card');
+						const prevBtn = section.querySelector('.nav-btn.left');
+						const nextBtn = section.querySelector('.nav-btn.right');
+
+						if (!cards.length || !prevBtn || !nextBtn) return;
+
+						let current = Array.from(cards).findIndex(card => card.classList.contains('active'));
+						if (current < 0) current = 0;
+
+						cards.forEach((card) => {
+							const source = card.querySelector('video source');
+							if (!source) return;
+							if (!source.dataset.src && source.getAttribute('src')) {
+								source.dataset.src = source.getAttribute('src');
+							}
+						});
+
+						function ensureVideoLoaded(card) {
+							const video = card.querySelector('video');
+							const source = card.querySelector('video source');
+							if (!video || !source) return { video: null, source: null };
+
+							const realSrc = source.dataset.src;
+							if (!realSrc) return { video, source };
+
+							if (source.getAttribute('src') !== realSrc) {
+								source.setAttribute('src', realSrc);
+								video.load();
+							}
+
+							return { video, source };
+						}
+
+						function unloadVideo(card) {
+							const video = card.querySelector('video');
+							const source = card.querySelector('video source');
+							if (!video || !source) return;
+
+							video.pause();
+							source.removeAttribute('src');
+							video.load();
+						}
+
+						function updateVideos() {
+							cards.forEach((card) => {
+								const isActive = card.classList.contains('active');
+								const isSide =
+									card.classList.contains('left') ||
+									card.classList.contains('right');
+
+								if (isActive || isSide) {
+									const { video } = ensureVideoLoaded(card);
+									if (!video) return;
+
+									if (isActive) {
+										const playPromise = video.play();
+										if (playPromise && typeof playPromise.catch === 'function') {
+											playPromise.catch(() => {});
+										}
+									} else {
+										video.pause();
+										try {
+											video.currentTime = 0;
+										} catch (e) {}
+									}
+								} else {
+									unloadVideo(card);
+								}
+							});
+						}
+
+						function updateCarousel() {
+							cards.forEach((card, index) => {
+								card.classList.remove('active', 'left', 'right', 'hidden-left', 'hidden-right');
+
+								if (index === current) {
+									card.classList.add('active');
+								} else if (index === (current - 1 + cards.length) % cards.length) {
+									card.classList.add('left');
+								} else if (index === (current + 1) % cards.length) {
+									card.classList.add('right');
+								} else if (index < current || (current === 0 && index === cards.length - 1)) {
+									card.classList.add('hidden-left');
+								} else {
+									card.classList.add('hidden-right');
+								}
+							});
+
+							updateVideos();
+						}
+
+						prevBtn.addEventListener('click', function () {
+							current = (current - 1 + cards.length) % cards.length;
+							updateCarousel();
+						});
+
+						nextBtn.addEventListener('click', function () {
+							current = (current + 1) % cards.length;
+							updateCarousel();
+						});
+
+						updateCarousel();
+					});
+				});
+			</script>
+
+	</body>
+</html>
